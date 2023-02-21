@@ -1,7 +1,7 @@
 <template>
 	<aside :class="`${is_expanded ? 'is-expanded' : ''}`">
 		<div class="logo">
-			<img :src="logoURL" alt="Vue" /> 
+			<img src="../assets/logo.png" alt="Vue" /> 
 		</div>
 
 		<div class="menu-toggle-wrap">
@@ -30,7 +30,7 @@
 			</router-link>
 		</div>
 
-		<div class="flex"></div>
+		<div class="flex-mod "></div>
 		
 		<div class="menu">
 			<router-link to="/settings" class="button">
@@ -41,15 +41,20 @@
 	</aside>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import logoURL from '../assets/logo.png'
+<script>
+import {mapState, mapMutations } from 'vuex';
 
-const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
+export default {
+	 computed:{
+			...mapState(['is_expanded'])		
+	},
+	methods:{
+		...mapMutations(['SIDE_BAR']),
+		ToggleMenu(){
+			this.SIDE_BAR()
+		}
 
-const ToggleMenu = () => {
-	is_expanded.value = !is_expanded.value
-	localStorage.setItem("is_expanded", is_expanded.value)
+	}
 }
 </script>
 
@@ -57,7 +62,7 @@ const ToggleMenu = () => {
 aside {
 	display: flex;
 	flex-direction: column;
-	background-color: var(--dark);
+	background-color: #141625;
 	color: var(--light);
 	width: calc(2rem + 32px);
 	overflow: hidden;
@@ -65,7 +70,7 @@ aside {
 	padding: 1rem;
 	transition: 0.2s ease-in-out;
 
-	.flex {
+	.flex-mod {
 		flex: 1 1 0%;
 	}
 

@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-buja-event {
+  /* cursor: pointer;
+  padding: 16px 24px;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  margin-right: 8px;
+  color: #fff; */
+
+  @apply cursor-pointer border-none text-white mr-[8px] font-[12px] rounded-[30px] pt-[12px] pb-[12px] pr-[9px] pl-[9px]
+}

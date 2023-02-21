@@ -1,15 +1,36 @@
 <template>
 	<div class="app">
 		<!-- Sidebar -->
-		<Sidebar />
-
+		<Modal v-if="isModalActive"/>
+		<Sidebar/>
 		<!-- Content -->
 		<router-view />
+		<Transition name="wrapModal">
+			<wrapMod v-if="wrapModal"/>
+		</Transition>
 	</div>
 </template>
 
-<script setup>
+<script>
+import { mapState } from 'vuex';
 import Sidebar from './components/Sidebar.vue'
+import wrapMod from './components/wrapModal.vue'
+import Modal from './components/Modal.vue';
+
+export default {
+	 data() {
+		 return {
+			 
+		}
+	},
+	methods:{
+		
+	},
+	components:{Sidebar,wrapMod,Modal},
+	computed:{
+		...mapState(['wrapModal','isModalActive'])
+	},
+}
 </script>
 
 <style lang="scss">
@@ -46,12 +67,22 @@ button {
 	display: flex;
 
 	main {
-		flex: 1 1 0;
-		padding: 2rem;
-		
+		flex: 1 1 0;	
 		@media (max-width: 1024px) {
 			padding-left: 6rem;
 		}
 	}
+}
+
+// animated modal
+
+.wrapModal-enter-active,
+.wrapModal-leave-active {
+  transition: 0.8s ease all;
+}
+
+.wrapModal-enter-from,
+.wrapModal-leave-to {
+  transform: translateX(700px);
 }
 </style>
